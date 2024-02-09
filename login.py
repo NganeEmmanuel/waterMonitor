@@ -15,7 +15,7 @@ class Login(QWidget):
 
     def load_ui(self):
         loader = QUiLoader()
-        path = os.fspath(Path(__file__).resolve().parent / "login.ui")
+        path = os.fspath(Path(__file__).resolve().parent / "dashboard.ui")
         ui_file = QFile(path)
         ui_file.open(QFile.ReadOnly)
         loader.load(ui_file, self)
