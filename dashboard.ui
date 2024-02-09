@@ -44,7 +44,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -99,6 +99,21 @@
              <string notr="true"/>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QTableWidget" name="tableWidget">
                <column>
@@ -179,11 +194,6 @@
                <column>
                 <property name="text">
                  <string>TSS</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Heavy Metals</string>
                 </property>
                </column>
               </widget>
@@ -644,6 +654,10 @@ QLineEdit:focus{
 	border-bottom: 1px solid rgb(66, 132, 198);
 }
 
+QLabel{
+	border-left: 0px;
+}
+
 QPushButton{
 	Background-color: rgb(66, 132, 198);
 	color: #fff;
@@ -659,6 +673,21 @@ QPushButton:pressed{
 }</string>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_7">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                    <item>
                     <widget class="QWidget" name="widget_20" native="true">
                      <widget class="QLabel" name="label_9">
@@ -1037,6 +1066,380 @@ QPushButton:pressed{
                     </widget>
                    </item>
                   </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Add User</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_28" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QWidget" name="widget_29" native="true">
+            <widget class="QTableWidget" name="tableWidget_2">
+             <property name="geometry">
+              <rect>
+               <x>-5</x>
+               <y>-9</y>
+               <width>431</width>
+               <height>581</height>
+              </rect>
+             </property>
+             <column>
+              <property name="text">
+               <string>Name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Username</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Email</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Authority</string>
+              </property>
+             </column>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_30" native="true">
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+	background-color: #fff;
+	border-left: 1px solid lightgrey;
+}</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_31" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>65</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QWidget#label_31{
+	border-bottom: 1px  solid lightgrey;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_32">
+                  <property name="styleSheet">
+                   <string notr="true">QLabel{
+	Font-size: 15px;
+	font-weight: bold;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Add User</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_31">
+                  <property name="styleSheet">
+                   <string notr="true">color: red;</string>
+                  </property>
+                  <property name="text">
+                   <string>Warnig !! Please fill in the form correctly</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_32" native="true">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit{
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid lightgrey;
+}
+
+QComboBox{
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid lightgrey;
+}
+
+QLineEdit:focus{
+	border-bottom: 1px solid rgb(66, 132, 198);
+}
+
+QLabel{
+	border-left: 0px;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_11">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="widget_33" native="true">
+                  <widget class="QLabel" name="label_33">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>30</y>
+                     <width>49</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Name *:</string>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="lineEdit_10">
+                   <property name="geometry">
+                    <rect>
+                     <x>130</x>
+                     <y>30</y>
+                     <width>261</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_34" native="true">
+                  <widget class="QLineEdit" name="lineEdit_12">
+                   <property name="geometry">
+                    <rect>
+                     <x>130</x>
+                     <y>30</y>
+                     <width>261</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_34">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>30</y>
+                     <width>71</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Username *:</string>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_38" native="true">
+                  <widget class="QLineEdit" name="lineEdit_13">
+                   <property name="geometry">
+                    <rect>
+                     <x>130</x>
+                     <y>30</y>
+                     <width>261</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_35">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>30</y>
+                     <width>71</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Email *:</string>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_35" native="true">
+                  <widget class="QLineEdit" name="lineEdit_14">
+                   <property name="geometry">
+                    <rect>
+                     <x>130</x>
+                     <y>30</y>
+                     <width>261</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_36">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>30</y>
+                     <width>71</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Password *:</string>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_36" native="true">
+                  <widget class="QLabel" name="label_37">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>30</y>
+                     <width>71</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Authority*:</string>
+                   </property>
+                  </widget>
+                  <widget class="QComboBox" name="comboBox">
+                   <property name="geometry">
+                    <rect>
+                     <x>140</x>
+                     <y>31</y>
+                     <width>251</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_37" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">QLabel{
+	color: green;
+}
+
+QPushButton{
+	background-color: rgb(66, 131, 197);
+	border: 0px;
+	color: #fff;
+}
+
+QPushButton:hover{
+	background-color: rgb(85, 170, 255);
+}</string>
+                  </property>
+                  <widget class="QLabel" name="label_38">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>10</y>
+                     <width>391</width>
+                     <height>20</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>successfully added student!!</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="pushButton_4">
+                   <property name="geometry">
+                    <rect>
+                     <x>140</x>
+                     <y>40</y>
+                     <width>171</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>PushButton</string>
+                   </property>
+                  </widget>
                  </widget>
                 </item>
                </layout>
