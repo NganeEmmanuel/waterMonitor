@@ -8,7 +8,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QCo
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 from Service import userService, sourceService
-from model import user
+from model import user, source
 
 
 class Login(QWidget):
@@ -33,7 +33,7 @@ class Login(QWidget):
         self.sourceName_input = None
         self.sourceLocation_input = None
         self.sourceType_selector = None
-        self.sourceStatus_selector = None
+        self.sourceStatus_input = None
         self.sourceCapacity_input = None
         self.waterLevel_input = None
         self.chlorine_input = None
@@ -85,7 +85,7 @@ class Login(QWidget):
         self.sourceName_input = self.findChild(QLineEdit, "sourceName_input")
         self.sourceLocation_input = self.findChild(QLineEdit, "sourceLocation_input")
         self.sourceType_selector = self.findChild(QComboBox, "sourceType_selector")
-        self.sourceStatus_selector = self.findChild(QComboBox, "sourceStatus_selector")
+        self.sourceStatus_input = self.findChild(QComboBox, "sourceStatus_input")
         self.sourceCapacity_input = self.findChild(QLineEdit, "sourceCapacity_input")
         self.waterLevel_input = self.findChild(QLineEdit, "waterLevel_input")
         self.chlorine_input = self.findChild(QLineEdit, "chlorine_input")
@@ -101,7 +101,7 @@ class Login(QWidget):
         self.addSource_success_message = self.findChild(QLabel, "addSource_success_message")
         self.addSource_error_message = self.findChild(QLabel, "addSource_error_message")
         self.addSource_btn = self.findChild(QPushButton, "addSource_btn")
-        self.addSource_btn.clicked.connect(self.add_source_clicked) # Call function to add source on button clicked
+        self.addSource_btn.clicked.connect(self.add_source_clicked)  # Call function to add source on button clicked
 
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
@@ -136,8 +136,8 @@ class Login(QWidget):
         s_location = self.sourceLocation_input.text()
         s_type = self.sourceType_selector.currentText()
         s_capacity = self.sourceCapacity_input.text()
-        s_status = self.sourceStatus_selector.currentText()
-        s_water_level = self.waterLevel_input.tex()
+        s_status = self.sourceStatus_input.currentText()
+        s_water_level = self.waterLevel_input.text()
         s_moderator1 = self.moderator_selector.currentText()
         s_moderator2 = self.moderator_selector_2.currentText()
         s_moderator3 = self.moderator_selector_3.currentText()
@@ -151,9 +151,16 @@ class Login(QWidget):
         s_bod = self.bod_input.text()
         s_cod = self.cod_input.text()
         s_tss = self.tss_input.text()
-        result = sourceService.add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, s_moderator1, s_moderator2, s_moderator3, s_chlorine, s_ph_level, s_temperature, s_turbidity, s_do, s_conductivity, s_tds, s_bod, s_cod, s_tss)
-        #check if a source object is being returned if so, i will hanlde it, else disaplay the warning messaged in self.addSource_error_message
+        result = sourceService.add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, s_moderator1,
+                                          s_moderator2, s_moderator3, s_chlorine, s_ph_level, s_temperature,
+                                          s_turbidity, s_do, s_conductivity, s_tds, s_bod, s_cod, s_tss)
 
+        if isinstance(result, source.Source):
+            self.addSource_success_message.setText("source added successfully")
+        else:
+            self.addSource_error_message.setText(result)
+        # check if a source object is being returned if so, i will hanlde it, else disaplay the warning messaged in
+        # self.addSource_error_message
 
     def clear_add_user_fields(self):
         self.addUser_name_input.clear()

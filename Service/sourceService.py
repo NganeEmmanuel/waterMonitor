@@ -13,7 +13,7 @@ def add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, 
         return "Please fill in all required fields"
 
     # Check if fields contain valid input type (double or integer)
-    if not inputValidator.is_valid_numeric_input(s_chlorine, s_ph_level, s_temperature, s_turbidity, s_do, s_conductivity, s_tds,
+    if not inputValidator.is_string_valid_numeric_input(s_capacity, s_water_level, s_chlorine, s_ph_level, s_temperature, s_turbidity, s_do, s_conductivity, s_tds,
                                   s_bod, s_cod, s_tss):
         return "Invalid input for numeric fields"
 
@@ -27,9 +27,9 @@ def add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, 
     new_source.name = s_name
     new_source.location = s_location
     new_source.type = s_type
-    new_source.capacity = s_capacity
+    new_source.capacity = float(s_capacity)
     new_source.status = s_status
-    new_source.water_level = s_water_level
+    new_source.water_level = float(s_water_level)
 
     # Create a comma-separated string of approver IDs
     approver_ids = str(moderator_1_user.id)
@@ -46,19 +46,19 @@ def add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, 
 
     # Create a quality object and populate it with the provided data
     new_quality = quality.Quality()
-    new_quality.ph_level = s_ph_level
-    new_quality.temperature = s_temperature
-    new_quality.turbidity = s_turbidity
-    new_quality.dissolved_0xygen = s_do
-    new_quality.conductivity = s_conductivity
-    new_quality.total_dissolved_solids = s_tds
-    new_quality.biochemical_oxygen_demand = s_bod
-    new_quality.chemical_oxygen_demand = s_cod
-    new_quality.total_suspended_solids = s_tss
-    new_quality.chlorine_residual = s_chlorine
+    new_quality.ph_level = float(s_ph_level) if inputValidator.is_string_valid_numeric_input(s_ph_level) else None
+    new_quality.temperature = float(s_temperature) if inputValidator.is_string_valid_numeric_input(s_temperature) else None
+    new_quality.turbidity = float(s_turbidity) if inputValidator.is_string_valid_numeric_input(s_turbidity) else None
+    new_quality.dissolved_0xygen = float(s_do) if inputValidator.is_string_valid_numeric_input(s_do) else None
+    new_quality.conductivity = float(s_conductivity) if inputValidator.is_string_valid_numeric_input(s_conductivity) else None
+    new_quality.total_dissolved_solids = float(s_tds) if inputValidator.is_string_valid_numeric_input(s_tds) else None
+    new_quality.biochemical_oxygen_demand = float(s_bod) if inputValidator.is_string_valid_numeric_input(s_bod) else None
+    new_quality.chemical_oxygen_demand = float(s_cod) if inputValidator.is_string_valid_numeric_input(s_cod) else None
+    new_quality.total_suspended_solids = float(s_tss) if inputValidator.is_string_valid_numeric_input(s_tss) else None
+    new_quality.chlorine_residual = float(s_chlorine) if inputValidator.is_string_valid_numeric_input(s_chlorine) else None
 
     # Associate the new quality object with the source
-    new_source.quality_readings = [new_quality]
+    new_source.quality_readings = new_quality
 
     # Persist the new source and quality objects to the database
     try:

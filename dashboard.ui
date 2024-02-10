@@ -301,7 +301,7 @@ border-bottom: 0px;</string>
 border-bottom: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>An error occured while trying to add water source. pLease fill the form properly and try again!!!</string>
+                   <string/>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1107,7 +1107,7 @@ QPushButton:pressed{
                          <string notr="true">color: green;</string>
                         </property>
                         <property name="text">
-                         <string>Successfu;;y added source</string>
+                         <string/>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignCenter</set>

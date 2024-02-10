@@ -23,8 +23,8 @@ class Source(Base):
     quality_id = Column(Integer, ForeignKey("quality.id"), nullable=True)
     quality_readings = relationship("Quality", back_populates="source")
     approvers = Column(String(200))
-    complaints = relationship("Complaint", back_populates="source")
+    complaints = Column(String(2000))
     # date when the water source's condition was initially added
-    added_date = Column(Date, default=datetime.datetime.utcnow)
+    added_date = Column(Date, default=datetime.datetime.utcnow())
     # date when the water source's condition was last monitored
     modified_date = Column(Date, default=datetime.datetime.utcnow)
