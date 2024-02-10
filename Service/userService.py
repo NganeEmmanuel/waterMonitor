@@ -1,5 +1,6 @@
 from model import user
 from Database import crud
+from Service import emailValidatorService
 
 
 def add_user(name, username, email, password, authority):
@@ -22,6 +23,9 @@ def add_user(name, username, email, password, authority):
         return "Please fill in all require (*) fields"
 
     # check for email validity
+    if not emailValidatorService.validate_email(email):
+        return "Invalid email format"
+
     # Create a new User object and set the attributes
     new_user = user.User()
     new_user.name = name
@@ -34,6 +38,7 @@ def add_user(name, username, email, password, authority):
     try:
         return crud.add(new_user)
     except Exception as e:
+
         # Handle any exceptions, such as duplicate fields
         return str(e)
 

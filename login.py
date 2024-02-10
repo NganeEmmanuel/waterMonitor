@@ -42,7 +42,6 @@ class Login(QWidget):
 
         self.addUser_authority_selector = self.findChild(QComboBox, "addUser_authority_selector")
 
-
         # get nodes from add users tab
         self.addUser_btn = self.findChild(QPushButton, "addUser_btn")
         self.addUser_name_input = self.findChild(QLineEdit, "addUser_name_input")
@@ -56,11 +55,11 @@ class Login(QWidget):
 
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
-        for row, user in enumerate(users):
-            name_item = QTableWidgetItem(user.name)
-            username_item = QTableWidgetItem(user.username)
-            email_item = QTableWidgetItem(user.email)
-            authority_item = QTableWidgetItem(user.authority)  # Assuming each user has only one authority
+        for row, table_user in enumerate(users):
+            name_item = QTableWidgetItem(table_user.name)
+            username_item = QTableWidgetItem(table_user.username)
+            email_item = QTableWidgetItem(table_user.email)
+            authority_item = QTableWidgetItem(table_user.authority)  # Assuming each user has only one authority
 
             self.user_table.setItem(row, 0, name_item)
             self.user_table.setItem(row, 1, username_item)
@@ -101,7 +100,6 @@ class Login(QWidget):
         self.user_table.setItem(row, 1, username_item)
         self.user_table.setItem(row, 2, email_item)
         self.user_table.setItem(row, 3, authority_item)
-
 
 
 if __name__ == "__main__":
