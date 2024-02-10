@@ -1,6 +1,5 @@
 from Database.database import Base, engine
 from model import user
-from model import authority
 from model import source
 from model import quality
 from model import complaint
