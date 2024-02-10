@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QCo
     QTableWidgetItem
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from Service import userService
+from Service import userService, sourceService
 from model import user
 
 
@@ -25,6 +25,30 @@ class Login(QWidget):
         self.addUser_username_input = None
         self.addUser_name_input = None
         self.addUser_btn = None
+
+        # Initialize nodes from add source
+        self.moderator_selector = None
+        self.moderator_selector_2 = None
+        self.moderator_selector_3 = None
+        self.sourceName_input = None
+        self.sourceLocation_input = None
+        self.sourceType_selector = None
+        self.sourceStatus_selector = None
+        self.sourceCapacity_input = None
+        self.waterLevel_input = None
+        self.chlorine_input = None
+        self.phLevel_input = None
+        self.temperature_input = None
+        self.turbidity_input = None
+        self.dissolvedOxygen_input = None
+        self.conductivity_input = None
+        self.tds_input = None
+        self.bod_input = None
+        self.cod_input = None
+        self.tss_input = None
+        self.addSource_success_message = None
+        self.addSource_error_message = None
+        self.addSource_btn = None
         self.load_ui()
 
     def load_ui(self):
@@ -35,23 +59,49 @@ class Login(QWidget):
         loader.load(ui_file, self)
         ui_file.close()
 
-        self.user_table = self.findChild(QTableWidget, "user_table")
         # Fill the user_table with all available users' info
+        self.user_table = self.findChild(QTableWidget, "user_table")
         users = userService.get_all_users()  # Retrieve the list of users from the database
         self.populate_user_table(users)  # Populate the user_table with the retrieved users
 
-        self.addUser_authority_selector = self.findChild(QComboBox, "addUser_authority_selector")
+        # Fill the moderator selectors in the add source section
+        self.moderator_selector = self.findChild(QComboBox, "moderator_selector")
+        self.moderator_selector_2 = self.findChild(QComboBox, "moderator_selector_2")
+        self.moderator_selector_3 = self.findChild(QComboBox, "moderator_selector_3")
+        self.populate_moderator_selectors(users)
 
         # get nodes from add users tab
         self.addUser_btn = self.findChild(QPushButton, "addUser_btn")
+        self.addUser_btn.clicked.connect(self.add_user_clicked)  # call function to add user on click of button
         self.addUser_name_input = self.findChild(QLineEdit, "addUser_name_input")
         self.addUser_username_input = self.findChild(QLineEdit, "addUser_username_input")
         self.addUser_email_input = self.findChild(QLineEdit, "addUser_email_input")
         self.addUser_password_input = self.findChild(QLineEdit, "addUser_password_input")
+        self.addUser_authority_selector = self.findChild(QComboBox, "addUser_authority_selector")
         self.addUser_success_label = self.findChild(QLabel, "addUser_success_label")
         self.addUser_warning_label = self.findChild(QLabel, "addUser_warning_label")
 
-        self.addUser_btn.clicked.connect(self.add_user_clicked)
+        # get nodes from add source tab
+        self.sourceName_input = self.findChild(QLineEdit, "sourceName_input")
+        self.sourceLocation_input = self.findChild(QLineEdit, "sourceLocation_input")
+        self.sourceType_selector = self.findChild(QComboBox, "sourceType_selector")
+        self.sourceStatus_selector = self.findChild(QComboBox, "sourceStatus_selector")
+        self.sourceCapacity_input = self.findChild(QLineEdit, "sourceCapacity_input")
+        self.waterLevel_input = self.findChild(QLineEdit, "waterLevel_input")
+        self.chlorine_input = self.findChild(QLineEdit, "chlorine_input")
+        self.phLevel_input = self.findChild(QLineEdit, "phLevel_input")
+        self.temperature_input = self.findChild(QLineEdit, "temperature_input")
+        self.turbidity_input = self.findChild(QLineEdit, "turbidity_input")
+        self.dissolvedOxygen_input = self.findChild(QLineEdit, "dissolvedOxygen_input")
+        self.conductivity_input = self.findChild(QLineEdit, "conductivity_input")
+        self.tds_input = self.findChild(QLineEdit, "tds_input")
+        self.bod_input = self.findChild(QLineEdit, "bod_input")
+        self.cod_input = self.findChild(QLineEdit, "cod_input")
+        self.tss_input = self.findChild(QLineEdit, "tss_input")
+        self.addSource_success_message = self.findChild(QLabel, "addSource_success_message")
+        self.addSource_error_message = self.findChild(QLabel, "addSource_error_message")
+        self.addSource_btn = self.findChild(QPushButton, "addSource_btn")
+        self.addSource_btn.clicked.connect(self.add_source_clicked) # Call function to add source on button clicked
 
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
@@ -81,6 +131,30 @@ class Login(QWidget):
         else:
             self.addUser_warning_label.setText(result)
 
+    def add_source_clicked(self):
+        s_name = self.sourceName_input.text()
+        s_location = self.sourceLocation_input.text()
+        s_type = self.sourceType_selector.currentText()
+        s_capacity = self.sourceCapacity_input.text()
+        s_status = self.sourceStatus_selector.currentText()
+        s_water_level = self.waterLevel_input.tex()
+        s_moderator1 = self.moderator_selector.currentText()
+        s_moderator2 = self.moderator_selector_2.currentText()
+        s_moderator3 = self.moderator_selector_3.currentText()
+        s_chlorine = self.chlorine_input.text()
+        s_ph_level = self.phLevel_input.text()
+        s_temperature = self.temperature_input.text()
+        s_turbidity = self.turbidity_input.text()
+        s_do = self.dissolvedOxygen_input.text()
+        s_conductivity = self.conductivity_input.text()
+        s_tds = self.tds_input.text()
+        s_bod = self.bod_input.text()
+        s_cod = self.cod_input.text()
+        s_tss = self.tss_input.text()
+        result = sourceService.add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, s_moderator1, s_moderator2, s_moderator3, s_chlorine, s_ph_level, s_temperature, s_turbidity, s_do, s_conductivity, s_tds, s_bod, s_cod, s_tss)
+        #check if a source object is being returned if so, i will hanlde it, else disaplay the warning messaged in self.addSource_error_message
+
+
     def clear_add_user_fields(self):
         self.addUser_name_input.clear()
         self.addUser_username_input.clear()
@@ -100,6 +174,23 @@ class Login(QWidget):
         self.user_table.setItem(row, 1, username_item)
         self.user_table.setItem(row, 2, email_item)
         self.user_table.setItem(row, 3, authority_item)
+
+    def populate_moderator_selectors(self, users):
+        self.clear_moderator_selectors()  # Clear existing items in the QComboBoxes
+        for moderator in users:
+            # Assuming the 'type' attribute of the Authority object is the one to be displayed
+            user_name = moderator.name
+            self.add_items_to_moderator_selectors(user_name)
+
+    def clear_moderator_selectors(self):
+        self.moderator_selector.clear()
+        self.moderator_selector_2.clear()
+        self.moderator_selector_3.clear()
+
+    def add_items_to_moderator_selectors(self, item):
+        self.moderator_selector.addItem(item)
+        self.moderator_selector_2.addItem(item)
+        self.moderator_selector_3.addItem(item)
 
 
 if __name__ == "__main__":

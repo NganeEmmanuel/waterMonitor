@@ -44,7 +44,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -295,7 +295,7 @@ border-bottom: 0px;</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_30">
+                 <widget class="QLabel" name="addSource_error_message">
                   <property name="styleSheet">
                    <string notr="true">color: red;
 border-bottom: 0px;</string>
@@ -355,6 +355,21 @@ border-bottom: 1px solid lightgrey;
 }</string>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                    <item>
                     <widget class="QWidget" name="widget_10" native="true">
                      <widget class="QLabel" name="label_2">
@@ -435,11 +450,6 @@ border-bottom: 1px solid lightgrey;
                       </property>
                       <item>
                        <property name="text">
-                        <string/>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
                         <string>Ocean</string>
                        </property>
                       </item>
@@ -500,16 +510,6 @@ border-bottom: 1px solid lightgrey;
                    </item>
                    <item>
                     <widget class="QWidget" name="widget_14" native="true">
-                     <widget class="QLineEdit" name="sourceStatus_input">
-                      <property name="geometry">
-                       <rect>
-                        <x>120</x>
-                        <y>20</y>
-                        <width>261</width>
-                        <height>31</height>
-                       </rect>
-                      </property>
-                     </widget>
                      <widget class="QLabel" name="label_6">
                       <property name="geometry">
                        <rect>
@@ -522,6 +522,36 @@ border-bottom: 1px solid lightgrey;
                       <property name="text">
                        <string>Source Status *:</string>
                       </property>
+                     </widget>
+                     <widget class="QComboBox" name="sourceStatus_input">
+                      <property name="geometry">
+                       <rect>
+                        <x>130</x>
+                        <y>20</y>
+                        <width>251</width>
+                        <height>31</height>
+                       </rect>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>ACTIVE</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>PENDING AUTHORIZATION</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DECOMISSIONED</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SHOTDOWN</string>
+                       </property>
+                      </item>
                      </widget>
                     </widget>
                    </item>
@@ -570,9 +600,29 @@ border-bottom: 1px solid lightgrey;
                      <widget class="QComboBox" name="moderator_selector">
                       <property name="geometry">
                        <rect>
-                        <x>118</x>
+                        <x>88</x>
                         <y>20</y>
-                        <width>261</width>
+                        <width>101</width>
+                        <height>31</height>
+                       </rect>
+                      </property>
+                     </widget>
+                     <widget class="QComboBox" name="moderator_selector_2">
+                      <property name="geometry">
+                       <rect>
+                        <x>200</x>
+                        <y>20</y>
+                        <width>101</width>
+                        <height>31</height>
+                       </rect>
+                      </property>
+                     </widget>
+                     <widget class="QComboBox" name="moderator_selector_3">
+                      <property name="geometry">
+                       <rect>
+                        <x>310</x>
+                        <y>20</y>
+                        <width>101</width>
                         <height>31</height>
                        </rect>
                       </property>
@@ -607,7 +657,7 @@ border-bottom: 1px solid lightgrey;
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_11">
+                     <widget class="QLineEdit" name="chlorine_input">
                       <property name="geometry">
                        <rect>
                         <x>110</x>
@@ -703,7 +753,7 @@ QPushButton:pressed{
                        <string>PH level :</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit">
+                     <widget class="QLineEdit" name="phLevel_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -756,7 +806,7 @@ QPushButton:pressed{
                        <string> / Celcius</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_2">
+                     <widget class="QLineEdit" name="temperature_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -796,7 +846,7 @@ QPushButton:pressed{
                        <string> / NTU</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_3">
+                     <widget class="QLineEdit" name="turbidity_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -836,7 +886,7 @@ QPushButton:pressed{
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_4">
+                     <widget class="QLineEdit" name="dissolvedOxygen_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -876,7 +926,7 @@ QPushButton:pressed{
                        <string> / ms/m</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_5">
+                     <widget class="QLineEdit" name="conductivity_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -916,7 +966,7 @@ QPushButton:pressed{
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_6">
+                     <widget class="QLineEdit" name="tds_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -956,7 +1006,7 @@ QPushButton:pressed{
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_7">
+                     <widget class="QLineEdit" name="bod_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -996,7 +1046,7 @@ QPushButton:pressed{
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_8">
+                     <widget class="QLineEdit" name="cod_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -1036,7 +1086,7 @@ QPushButton:pressed{
                        <string> / mg/L</string>
                       </property>
                      </widget>
-                     <widget class="QLineEdit" name="lineEdit_9">
+                     <widget class="QLineEdit" name="tss_input">
                       <property name="geometry">
                        <rect>
                         <x>120</x>
@@ -1050,19 +1100,28 @@ QPushButton:pressed{
                    </item>
                    <item>
                     <widget class="QWidget" name="widget_27" native="true">
-                     <widget class="QPushButton" name="pushButton_3">
-                      <property name="geometry">
-                       <rect>
-                        <x>120</x>
-                        <y>10</y>
-                        <width>211</width>
-                        <height>31</height>
-                       </rect>
-                      </property>
-                      <property name="text">
-                       <string>Add Source</string>
-                      </property>
-                     </widget>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <item>
+                       <widget class="QLabel" name="addSource_success_message">
+                        <property name="styleSheet">
+                         <string notr="true">color: green;</string>
+                        </property>
+                        <property name="text">
+                         <string>Successfu;;y added source</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="addSource_btn">
+                        <property name="text">
+                         <string>Add Source</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>

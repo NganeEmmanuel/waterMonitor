@@ -45,3 +45,6 @@ def add_user(name, username, email, password, authority):
 
 def get_all_users():
     return crud.find_all(user.User)
+
+def get_user_by_name(name):
+    return crud.find_by("name", name)
