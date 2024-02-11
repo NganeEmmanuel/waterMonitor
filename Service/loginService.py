@@ -7,7 +7,7 @@ def login(username, password):
         user = session.query(importService.User).filter(importService.User.username == username).first()
         if user:
             if user.password == password:
-                return "success"
+                return user
             else:
                 return "User credentials not valid"
         else:

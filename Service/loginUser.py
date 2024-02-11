@@ -1,3 +1,3 @@
-from model import user
+from model import authUser
 
-login_user = user.User()
+login_user = authUser.AuthUser()
