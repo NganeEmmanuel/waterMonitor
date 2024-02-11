@@ -57,13 +57,13 @@ class Widget(QWidget):
 
         # This function will be called when the button is clicked
         logged_in_user = loginService.login(username, password)
-        auth_user = crud.session.query(authUser.AuthUser).filter_by(id=1).first()
-        auth_user.name = logged_in_user.name
-        auth_user.username = logged_in_user.username
-        auth_user.email = logged_in_user.email
-        auth_user.password = logged_in_user.password
-        auth_user.authority = logged_in_user.authority
         if isinstance(logged_in_user, user.User):
+            auth_user = crud.session.query(authUser.AuthUser).filter_by(id=1).first()
+            auth_user.name = logged_in_user.name
+            auth_user.username = logged_in_user.username
+            auth_user.email = logged_in_user.email
+            auth_user.password = logged_in_user.password
+            auth_user.authority = logged_in_user.authority
             crud.session.commit()
             subprocess.Popen(["python", "dashboard.py"])
             self.close()

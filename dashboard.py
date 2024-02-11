@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QComboBox, QLabel, QTableWidget, \
-    QTableWidgetItem, QTextEdit
+    QTableWidgetItem, QTextEdit, QTabWidget
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 from Service import userService, sourceService, qualityService, exportService, emailService, complaintService, \
@@ -138,6 +138,8 @@ class Dashboard(QWidget):
         self.submit_complaint_btn = self.findChild(QPushButton, "submit_complaint_btn")
         self.submit_complaint_btn.clicked.connect(self.submit_complaint)
 
+        self.enable_features()
+
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
         for row, table_user in enumerate(users):
@@ -262,6 +264,28 @@ class Dashboard(QWidget):
         self.addUser_email_input.clear()
         self.addUser_password_input.clear()
         self.addUser_authority_selector.setCurrentIndex(0)
+
+    def enable_features(self):
+        self.add_user_tab = self.findChild(QTabWidget, "tabWidget")
+        if loginUser.login_user.authority == "ADMIN":
+            # Get the reference to the tab you want to enable
+            tab = self.add_user_tab.widget(2)  # Change the index to the tab you want to enable
+            tab2 = self.add_user_tab.widget(1)
+
+            # Enable the tab
+            self.add_user_tab.setTabEnabled(self.add_user_tab.indexOf(tab), True)
+            self.add_user_tab.setTabEnabled(self.add_user_tab.indexOf(tab2), True)
+            self.add_user_tab.removeTab(3)
+        elif loginUser.login_user.authority == "ADMIN" or loginUser.login_user.authority == "MODERATOR":
+            # Get the reference to the tab you want to enable
+            tab = self.add_user_tab.widget(1)  # Change the index to the tab you want to enable
+
+            # Enable the tab
+            self.add_user_tab.removeTab(2)
+            self.add_user_tab.setTabEnabled(self.add_user_tab.indexOf(tab), True)
+        else:
+            self.add_user_tab.removeTab(2)
+            self.add_user_tab.removeTab(1)
 
     def add_user_to_table(self, name, username, email, authority):
         row = self.user_table.rowCount()

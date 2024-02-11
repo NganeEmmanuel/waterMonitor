@@ -43,8 +43,11 @@
    </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -245,6 +248,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <attribute name="title">
        <string>Add Source</string>
       </attribute>
@@ -1144,6 +1150,9 @@ QPushButton:pressed{
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <attribute name="title">
        <string>Add User</string>
       </attribute>
