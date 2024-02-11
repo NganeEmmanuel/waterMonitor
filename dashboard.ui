@@ -44,7 +44,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -1539,7 +1539,7 @@ QPushButton:hover{
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Page</string>
+       <string>Complaint</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_13">
        <property name="spacing">
@@ -1602,12 +1602,12 @@ font-weight: bold;;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_31">
+              <widget class="QLabel" name="complaint_error_message">
                <property name="styleSheet">
                 <string notr="true">color: red;</string>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1632,7 +1632,7 @@ font-weight: bold;;</string>
               <string>Select Source *: </string>
              </property>
             </widget>
-            <widget class="QComboBox" name="comboBox">
+            <widget class="QComboBox" name="source_selector">
              <property name="geometry">
               <rect>
                <x>310</x>
@@ -1655,7 +1655,7 @@ font-weight: bold;;</string>
               <string>Details*:</string>
              </property>
             </widget>
-            <widget class="QTextEdit" name="textEdit">
+            <widget class="QTextEdit" name="complaint_details">
              <property name="geometry">
               <rect>
                <x>70</x>
@@ -1665,7 +1665,7 @@ font-weight: bold;;</string>
               </rect>
              </property>
             </widget>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="submit_complaint_btn">
              <property name="geometry">
               <rect>
                <x>360</x>
@@ -1678,7 +1678,7 @@ font-weight: bold;;</string>
               <string>Submit Complaint</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_40">
+            <widget class="QLabel" name="complaint_success_message">
              <property name="geometry">
               <rect>
                <x>110</x>
@@ -1691,7 +1691,7 @@ font-weight: bold;;</string>
               <string notr="true">color: green</string>
              </property>
              <property name="text">
-              <string>Select Source *: </string>
+              <string/>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>

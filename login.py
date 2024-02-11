@@ -4,10 +4,10 @@ from pathlib import Path
 import sys
 
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QComboBox, QLabel, QTableWidget, \
-    QTableWidgetItem
+    QTableWidgetItem, QTextEdit
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from Service import userService, sourceService, qualityService, exportService, emailService
+from Service import userService, sourceService, qualityService, exportService, emailService, complaintService
 from model import user, source
 
 
@@ -53,6 +53,14 @@ class Login(QWidget):
         # Initialize dashboard nodes
         self.source_table = None
         self.export_data_btn = None
+        self.email_btn = None
+        self.complaint_details = None
+
+        # initialize complaint nodes
+        self.source_selector = None
+        self.complaint_success_message = None
+        self.complaint_error_message = None
+        self.submit_complaint_btn = None
         self.load_ui()
 
     def load_ui(self):
@@ -77,6 +85,11 @@ class Login(QWidget):
         self.moderator_selector_2 = self.findChild(QComboBox, "moderator_selector_2")
         self.moderator_selector_3 = self.findChild(QComboBox, "moderator_selector_3")
         self.populate_moderator_selectors(users)
+
+        # Fill the source_selector with all available users' info
+        self.source_selector = self.findChild(QComboBox, "source_selector")
+        sources = sourceService.get_all_sources()  # Retrieve the list of users from the database
+        self.populate_source_selector(sources)  # Populate the user_table with the retrieved users
 
         # get nodes from add users tab
         self.addUser_btn = self.findChild(QPushButton, "addUser_btn")
@@ -116,6 +129,12 @@ class Login(QWidget):
 
         self.email_btn = self.findChild(QPushButton, "email_btn")
         self.email_btn.clicked.connect(self.send_email)
+
+        self.complaint_details = self.findChild(QTextEdit, "complaint_details")
+        self.complaint_success_message = self.findChild(QLabel, "complaint_success_message")
+        self.complaint_error_message = self.findChild(QLabel, "complaint_error_message")
+        self.submit_complaint_btn = self.findChild(QPushButton, "submit_complaint_btn")
+        self.submit_complaint_btn.clicked.connect(self.submit_complaint)
 
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
@@ -305,6 +324,12 @@ class Login(QWidget):
             user_name = moderator.name
             self.add_items_to_moderator_selectors(user_name)
 
+    def populate_source_selector(self, sources):
+        for water_source in sources:
+            # Assuming the 'type' attribute of the Authority object is the one to be displayed
+            source_name = water_source.name
+            self.add_items_to_source_selectors(source_name)
+
     def export_to_spreadsheet(self):
         # Get selected row from self.source_table (using QTableWidget) and its column data
         selected_row = self.source_table.currentRow()
@@ -362,6 +387,17 @@ class Login(QWidget):
         self.moderator_selector.addItem(item)
         self.moderator_selector_2.addItem(item)
         self.moderator_selector_3.addItem(item)
+
+    def add_items_to_source_selectors(self, item):
+        self.source_selector.addItem(item)
+
+    def submit_complaint(self):
+        result = complaintService.submit_complaint(self.source_selector.currentText(), self.complaint_details.toPlainText())
+        if result == "success":
+            self.complaint_success_message.setText("Complaint submitted successfully")
+            self.complaint_details.setText("")
+        else:
+            self.complaint_error_message.setText(result)
 
 
 if __name__ == "__main__":

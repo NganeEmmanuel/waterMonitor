@@ -10,7 +10,7 @@ class Complaint(Base):
     __tablename__ = "complaint"
     __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
-    subject = Column(String(250), nullable=True)
     details = Column(String(5000), nullable=False)
+    source_id = Column(Integer, ForeignKey("source.id"), nullable=False)  # user making compliant, customer authority
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)  # user making compliant, customer authority
-    added_date = Column(Date, default=datetime.datetime)
+    added_date = Column(Date, default=datetime.datetime.utcnow())

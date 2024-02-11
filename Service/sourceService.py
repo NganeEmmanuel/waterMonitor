@@ -73,3 +73,8 @@ def get_all_sources():
 
 def get_source_by_name(source_name):
     return crud.find_by("name", source_name, source.Source)
+
+
+def get_source_id_by_name(source_name):
+    new_source = crud.find_by("name", source_name, source.Source)
+    return new_source.id
