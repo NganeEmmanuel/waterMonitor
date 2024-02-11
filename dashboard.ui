@@ -211,7 +211,7 @@
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="export_data">
              <property name="geometry">
               <rect>
                <x>10</x>
