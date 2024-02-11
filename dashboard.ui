@@ -224,7 +224,7 @@
               <string>Export data</string>
              </property>
             </widget>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="email_btn">
              <property name="geometry">
               <rect>
                <x>14</x>
@@ -1530,6 +1530,173 @@ QPushButton:hover{
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Page</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_39" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_40" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>55</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-bottom: 1px solid lightgrey</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_15">
+             <item>
+              <widget class="QLabel" name="label_30">
+               <property name="styleSheet">
+                <string notr="true">font-size: 15px;
+font-weight: bold;;</string>
+               </property>
+               <property name="text">
+                <string>Add Complaint</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_31">
+               <property name="styleSheet">
+                <string notr="true">color: red;</string>
+               </property>
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_41" native="true">
+            <widget class="QLabel" name="label_38">
+             <property name="geometry">
+              <rect>
+               <x>400</x>
+               <y>30</y>
+               <width>91</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Select Source *: </string>
+             </property>
+            </widget>
+            <widget class="QComboBox" name="comboBox">
+             <property name="geometry">
+              <rect>
+               <x>310</x>
+               <y>50</y>
+               <width>281</width>
+               <height>41</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_39">
+             <property name="geometry">
+              <rect>
+               <x>420</x>
+               <y>130</y>
+               <width>51</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Details*:</string>
+             </property>
+            </widget>
+            <widget class="QTextEdit" name="textEdit">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>150</y>
+               <width>741</width>
+               <height>221</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButton">
+             <property name="geometry">
+              <rect>
+               <x>360</x>
+               <y>450</y>
+               <width>191</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Submit Complaint</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_40">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>410</y>
+               <width>691</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: green</string>
+             </property>
+             <property name="text">
+              <string>Select Source *: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
            </widget>
           </item>
          </layout>

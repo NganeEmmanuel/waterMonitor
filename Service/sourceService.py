@@ -69,3 +69,7 @@ def add_source(s_name, s_location, s_type, s_capacity, s_status, s_water_level, 
 
 def get_all_sources():
     return crud.find_all(source.Source)
+
+
+def get_source_by_name(source_name):
+    return crud.find_by("name", source_name, source.Source)

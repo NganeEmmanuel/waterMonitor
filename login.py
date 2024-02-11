@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QCo
     QTableWidgetItem
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from Service import userService, sourceService, qualityService, exportService
+from Service import userService, sourceService, qualityService, exportService, emailService
 from model import user, source
 
 
@@ -113,6 +113,9 @@ class Login(QWidget):
 
         self.export_data_btn = self.findChild(QPushButton, "export_data")
         self.export_data_btn.clicked.connect(self.export_to_spreadsheet)
+
+        self.email_btn = self.findChild(QPushButton, "email_btn")
+        self.email_btn.clicked.connect(self.send_email)
 
     def populate_user_table(self, users):
         self.user_table.setRowCount(len(users))
@@ -312,6 +315,27 @@ class Login(QWidget):
 
         # Call a function that takes the column data as arguments
         exportService.export_data_to_spreadsheet(*column_data)
+
+    def send_email(self):
+        selected_row = self.source_table.currentRow()
+        source_name = self.source_table.item(selected_row, 0).text()
+
+        # Get the source with the name equal to the column data
+        email_source = sourceService.get_source_by_name(source_name)
+
+        # Prepare email content
+        subject = "[Warning message for water source]"
+        body = f"Source Information:\n\n" \
+               f"Name: {email_source.name}\n" \
+               f"Location: {email_source.location}\n" \
+               f"Type: {email_source.type}\n" \
+               f"Capacity: {email_source.capacity}\n" \
+               f"Status: {email_source.status}\n" \
+               f"Water Level: {email_source.water_level}\n" \
+               f"Approvers: {email_source.approvers}\n"
+
+        # Send email
+        emailService.send_email_to_recipient("emmanuelngane06@gmail.com", subject, body)
 
     def clear_moderator_selectors(self):
         self.moderator_selector.clear()
