@@ -9,7 +9,7 @@ def is_string_valid_numeric_input(*args):
         bool: True if all values are valid numeric values, False otherwise.
     """
     for value in args:
-        if not value.isspace():  # checks if it's not empty
+        if value is not None and not value.isspace() and value != "":  # checks if it's not empty and not equal to None
             try:
                 float(value)  # try converting value to float
             except ValueError:

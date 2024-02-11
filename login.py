@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QCo
     QTableWidgetItem
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from Service import userService, sourceService
+from Service import userService, sourceService, qualityService
 from model import user, source
 
 
@@ -49,6 +49,9 @@ class Login(QWidget):
         self.addSource_success_message = None
         self.addSource_error_message = None
         self.addSource_btn = None
+
+        # Initialize dashboard nodes
+        self.source_table = None
         self.load_ui()
 
     def load_ui(self):
@@ -63,6 +66,10 @@ class Login(QWidget):
         self.user_table = self.findChild(QTableWidget, "user_table")
         users = userService.get_all_users()  # Retrieve the list of users from the database
         self.populate_user_table(users)  # Populate the user_table with the retrieved users
+
+        self.source_table = self.findChild(QTableWidget, "source_table")
+        sources = sourceService.get_all_sources()
+        self.populate_source_table(sources)
 
         # Fill the moderator selectors in the add source section
         self.moderator_selector = self.findChild(QComboBox, "moderator_selector")
@@ -116,6 +123,52 @@ class Login(QWidget):
             self.user_table.setItem(row, 2, email_item)
             self.user_table.setItem(row, 3, authority_item)
 
+    def populate_source_table(self, sources):
+        self.source_table.setRowCount(len(sources))
+        for row, table_source in enumerate(sources):
+            # get quality reading for each water source
+            quality_readings = qualityService.get_quality_by_id(table_source.quality_id)
+
+            # get approved moderators for each water sources
+            approved_moderators = userService.find_users_by_string_ids(table_source.approvers)
+            name_item = QTableWidgetItem(table_source.name)
+            location_item = QTableWidgetItem(table_source.location)
+            type_item = QTableWidgetItem(table_source.type)
+            capacity_item = QTableWidgetItem(str(table_source.capacity))
+            status_item = QTableWidgetItem(table_source.status)
+            water_leve_item = QTableWidgetItem(str(table_source.water_level))
+            approvers_item = QTableWidgetItem(approved_moderators)
+            chlorine_item = QTableWidgetItem(str(quality_readings.chlorine_residual) if quality_readings.chlorine_residual is not None else "NA")
+            ph_item = QTableWidgetItem(str(quality_readings.ph_level) if quality_readings.ph_level is not None else "NA")
+            temp_item = QTableWidgetItem(str(quality_readings.temperature) if quality_readings.temperature is not None else "NA")
+            turb_item = QTableWidgetItem(str(quality_readings.turbidity) if quality_readings.turbidity is not None else "NA")
+            do_item = QTableWidgetItem(str(quality_readings.dissolved_0xygen) if quality_readings.dissolved_0xygen is not None else "NA")
+            conductivity_item = QTableWidgetItem(str(quality_readings.conductivity) if quality_readings.conductivity is not None else "NA")
+            tds_item = QTableWidgetItem(str(quality_readings.total_dissolved_solids) if quality_readings.total_dissolved_solids is not None else "NA")
+            bod_item = QTableWidgetItem(str(quality_readings.biochemical_oxygen_demand) if quality_readings.biochemical_oxygen_demand is not None else "NA")
+            cod_item = QTableWidgetItem(str(quality_readings.chemical_oxygen_demand) if quality_readings.chemical_oxygen_demand is not None else "NA")
+            tss_item = QTableWidgetItem(str(quality_readings.total_suspended_solids) if quality_readings.total_suspended_solids is not None else "NA")
+
+            self.source_table.setItem(row, 0, name_item)
+            self.source_table.setItem(row, 1, location_item)
+            self.source_table.setItem(row, 2, type_item)
+            self.source_table.setItem(row, 3, capacity_item)
+            self.source_table.setItem(row, 4, status_item)
+            self.source_table.setItem(row, 5,water_leve_item)
+            self.source_table.setItem(row, 6, approvers_item)
+            self.source_table.setItem(row, 7, chlorine_item)
+            self.source_table.setItem(row, 8, ph_item)
+            self.source_table.setItem(row, 9, temp_item)
+            self.source_table.setItem(row, 10, turb_item)
+            self.source_table.setItem(row, 11, do_item)
+            self.source_table.setItem(row, 12, conductivity_item)
+            self.source_table.setItem(row, 13, tds_item)
+            self.source_table.setItem(row, 14, bod_item)
+            self.source_table.setItem(row, 15, cod_item)
+            self.source_table.setItem(row, 16, tss_item)
+
+
+
     def add_user_clicked(self):
         name = self.addUser_name_input.text()
         username = self.addUser_username_input.text()
@@ -156,7 +209,12 @@ class Login(QWidget):
                                           s_turbidity, s_do, s_conductivity, s_tds, s_bod, s_cod, s_tss)
 
         if isinstance(result, source.Source):
+            approvers = s_moderator1 + ","+ s_moderator2 + "," + s_moderator3
+            self.add_source_to_table(s_name, s_location, s_type, s_capacity, s_status, s_water_level,approvers,
+                                     s_chlorine, s_ph_level, s_temperature, s_turbidity, s_do, s_conductivity, s_tds,
+                                     s_bod, s_cod, s_tss)
             self.addSource_success_message.setText("source added successfully")
+            self.clear_add_source_fields()
         else:
             self.addSource_error_message.setText(result)
         # check if a source object is being returned if so, i will hanlde it, else disaplay the warning messaged in
@@ -182,6 +240,47 @@ class Login(QWidget):
         self.user_table.setItem(row, 2, email_item)
         self.user_table.setItem(row, 3, authority_item)
 
+    def add_source_to_table(self, name, location, s_type, capacity, status, water_level, approvers, chlorine, ph, temp, turb, do, conductivity, tds, bod, cod, tss):
+        row = self.source_table.rowCount()
+        self.source_table.insertRow(row)
+
+        name_item = QTableWidgetItem(name)
+        location_item = QTableWidgetItem(location)
+        type_item = QTableWidgetItem(s_type)
+        capacity_item = QTableWidgetItem(capacity)
+        status_item = QTableWidgetItem(status)
+        water_leve_item = QTableWidgetItem(water_level)
+        approvers_item = QTableWidgetItem(approvers)
+        chlorine_item = QTableWidgetItem(
+            chlorine if chlorine != "" and not chlorine.isspace() else "NA")
+        ph_item = QTableWidgetItem(ph if ph != "" and not ph.isspace() else "NA")
+        temp_item = QTableWidgetItem(temp if temp != "" and not temp.isspace() else "NA")
+        turb_item = QTableWidgetItem(turb if turb != "" and not turb.isspace() else "NA")
+        do_item = QTableWidgetItem(do if do != "" and not do.isspace() else "NA")
+        conductivity_item = QTableWidgetItem(conductivity if conductivity != "" and not conductivity.isspace() else "NA")
+        tds_item = QTableWidgetItem(tds if tds != "" and not tds.isspace() else "NA")
+        bod_item = QTableWidgetItem(bod if bod != "" and not bod.isspace() else "NA")
+        cod_item = QTableWidgetItem(cod if cod != "" and not cod.isspace() else "NA")
+        tss_item = QTableWidgetItem(tss if tss != "" and not tss.isspace() else "NA")
+
+        self.source_table.setItem(row, 0, name_item)
+        self.source_table.setItem(row, 1, location_item)
+        self.source_table.setItem(row, 2, type_item)
+        self.source_table.setItem(row, 3, capacity_item)
+        self.source_table.setItem(row, 4, status_item)
+        self.source_table.setItem(row, 5, water_leve_item)
+        self.source_table.setItem(row, 6, approvers_item)
+        self.source_table.setItem(row, 7, chlorine_item)
+        self.source_table.setItem(row, 8, ph_item)
+        self.source_table.setItem(row, 9, temp_item)
+        self.source_table.setItem(row, 10, turb_item)
+        self.source_table.setItem(row, 11, do_item)
+        self.source_table.setItem(row, 12, conductivity_item)
+        self.source_table.setItem(row, 13, tds_item)
+        self.source_table.setItem(row, 14, bod_item)
+        self.source_table.setItem(row, 15, cod_item)
+        self.source_table.setItem(row, 16, tss_item)
+
     def populate_moderator_selectors(self, users):
         self.clear_moderator_selectors()  # Clear existing items in the QComboBoxes
         for moderator in users:
@@ -193,6 +292,22 @@ class Login(QWidget):
         self.moderator_selector.clear()
         self.moderator_selector_2.clear()
         self.moderator_selector_3.clear()
+
+    def clear_add_source_fields(self):
+        self.sourceName_input.setText("")
+        self.sourceLocation_input.setText("")
+        self.sourceCapacity_input.setText("")
+        self.waterLevel_input.setText("")
+        self.chlorine_input.setText("")
+        self.phLevel_input.setText("")
+        self.temperature_input.setText("")
+        self.turbidity_input.setText("")
+        self.dissolvedOxygen_input.setText("")
+        self.conductivity_input.setText("")
+        self.tds_input.setText("")
+        self.bod_input.setText("")
+        self.cod_input.setText("")
+        self.tss_input.setText("")
 
     def add_items_to_moderator_selectors(self, item):
         self.moderator_selector.addItem(item)

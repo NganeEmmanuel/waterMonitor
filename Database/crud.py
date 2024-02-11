@@ -11,6 +11,7 @@ def add(persist_object):
     """
     session.add(persist_object)
     session.commit()
+    session.refresh(persist_object)  # Refresh the object to update the ID
     session.close()
     return persist_object
 

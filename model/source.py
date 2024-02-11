@@ -20,8 +20,7 @@ class Source(Base):
     capacity = Column(Float)  # The maximum capacity or volume of water that the source can hold
     status = Column(String(20))  # status of the water source, such as active, inactive, or under maintenance.
     water_level = Column(Float)  # The current water level or depth in the source.
-    quality_id = Column(Integer, ForeignKey("quality.id"), nullable=True)
-    quality_readings = relationship("Quality", back_populates="source")
+    quality_id = Column(Integer, nullable=False)
     approvers = Column(String(200))
     complaints = Column(String(2000))
     # date when the water source's condition was initially added

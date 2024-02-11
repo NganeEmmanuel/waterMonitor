@@ -44,7 +44,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -115,7 +115,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QTableWidget" name="tableWidget">
+              <widget class="QTableWidget" name="source_table">
                <column>
                 <property name="text">
                  <string>Name</string>
@@ -148,7 +148,12 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Approved By</string>
+                 <string>Approvals</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Chlorine</string>
                 </property>
                </column>
                <column>

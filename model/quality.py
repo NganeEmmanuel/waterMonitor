@@ -24,6 +24,5 @@ class Quality(Base):
     chemical_oxygen_demand = Column(Double)  # Milligrams per liter (mg/L)
     total_suspended_solids = Column(Double)  # Milligrams per liter (mg/L)
     chlorine_residual = Column(Double)  # Milligrams per liter (mg/L)
-    source = relationship("Source", back_populates="quality_readings")
     added_date = Column(Date, default=datetime.datetime.utcnow())
     modified_date = Column(Date, default=datetime.datetime.utcnow())
