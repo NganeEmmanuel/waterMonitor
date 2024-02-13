@@ -85,3 +85,18 @@ def find_users_by_string_ids(approvers):
 
     # Return the string of users' names
     return result
+
+
+def get_user_by_id(approvers):
+    # Split the string of IDs by comma
+    ids = approvers.split(',')
+
+    # Iterate over each ID
+    for u_id in ids:
+        # Remove leading and trailing whitespaces from the ID
+        u_id = u_id.strip()
+
+        # Perform a search in the user database using crud.find_by("id", id, user.User)
+        db_user = crud.find_by("id", u_id, user.User)
+
+        return db_user.email

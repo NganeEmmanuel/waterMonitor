@@ -374,6 +374,8 @@ class Dashboard(QWidget):
         # Get the source with the name equal to the column data
         email_source = sourceService.get_source_by_name(source_name)
 
+        user_email = userService.get_user_by_id(email_source.approvers)
+
         # Prepare email content
         subject = "[Warning message for water source]"
         body = f"Source Information:\n\n" \
@@ -386,7 +388,7 @@ class Dashboard(QWidget):
                f"Approvers: {email_source.approvers}\n"
 
         # Send email
-        emailService.send_email_to_recipient("emmanuelngane06@gmail.com", subject, body)
+        emailService.send_email_to_recipient(user_email, subject, body)
 
     def clear_moderator_selectors(self):
         self.moderator_selector.clear()

@@ -17,7 +17,7 @@ def export_data_to_spreadsheet(s_name, s_location, s_type, s_capacity, s_status,
     export_directory.mkdir(parents=True, exist_ok=True)
 
     # Create a filename for the export file
-    filename = export_directory / "exported_data.csv"
+    filename = export_directory / "exported.csv"
 
     # Write the data to a CSV file
     with open(filename, "w", newline="") as file:
